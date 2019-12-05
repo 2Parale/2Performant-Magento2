@@ -1,0 +1,18 @@
+<?php
+$campaignUnique = ''; // Your campaign unique
+$confirm = ''; // Your confirm token
+
+$order = $block->getOrder();
+$products = $order->getItems();
+$productDescription = '';
+$len = count($products);
+$i = 1;
+foreach ($products as $product) {
+    $productDescription .= $product->getName();
+    if ($i < $len) $productDescription .= ' ';
+    $i++;
+}
+
+?>
+
+<iframe height='1' width='1' scrolling='no' marginheight='0' marginwidth='0' frameborder='0' src='https://event.2performant.com/events/salecheck?amount=<?php echo number_format((float)$order['base_subtotal'], 2, '.', ''); ?>&campaign_unique=<?php echo $campaignUnique; ?>&confirm=<?php echo $confirm; ?>&description=<?php echo urlencode($productDescription); ?>&transaction_id=<?php echo $order->getIncrementId(); ?>'></iframe>
